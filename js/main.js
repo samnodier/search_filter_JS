@@ -39,6 +39,7 @@ function showData(jsonObj) {
 
 	const itemsList = jsonObj;
 
+	// Show items initially before the user starts typing
 	itemsList.forEach((item) => {
 		const initialListItem = document.createElement('li');
 		initialListItem.setAttribute('id', `${item.id}`);
@@ -56,11 +57,13 @@ function showData(jsonObj) {
 
 	// Add an event Listener to listen for the keystrokes in the input form
 	form.addEventListener('input', () => {
+		// Clear the everything the list to avoid some items repeating
 		initialListContainer.parentNode.removeChild(initialListContainer);
 		while (initialListContainer.firstChild) {
 			initialListContainer.removeChild(initialListContainer.firstChild);
 		}
 
+		// Regenerate all items filtered.
 		let listItems = jsonObj;
 		listItems.forEach((each) => {
 			if(each.content.includes(input.value)){
